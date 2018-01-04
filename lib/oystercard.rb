@@ -23,6 +23,10 @@ class Oystercard
     false
   end
 
+  def touch_in
+    
+  end
+
   # def max_balance
   #   90
   # end
