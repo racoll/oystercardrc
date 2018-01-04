@@ -19,6 +19,10 @@ class Oystercard
     @balance -= amount
   end
 
+  def in_journey?
+    false
+  end
+
   # def max_balance
   #   90
   # end
