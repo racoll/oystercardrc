@@ -34,15 +34,16 @@ describe Oystercard do
 
       it "can have a fare deducted from the balance" do
         oystercard.top_up(10)
-        oystercard.deduct(5)
-        expect(oystercard.balance).to eq (5)
+        oystercard.touch_out
+        expect(oystercard.balance).to eq (8)
       end
 
       it "raises an error if the balance drops below the minimum balance" do
         minimum_balance = Oystercard::MINIMUM_BALANCE
-        oystercard.top_up(10)
-        oystercard.deduct(7)
-        expect { oystercard.deduct 1}.to raise_error "Insufficient funds. Please top up"
+        oystercard.top_up(4)
+        oystercard.touch_in
+        # oystercard.touch_out
+        expect { oystercard.touch_out}.to raise_error "Insufficient funds. Please top up"
       end
 
     end
@@ -71,11 +72,11 @@ describe Oystercard do
       expect{ subject.touch_in }.to raise_error "Insufficient balance to touch in"
     end
 
-    it "will deduct the minimum charge upon touch in" do
-      oystercard.top_up(10)
-      subject.touch_in
-      expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
-    end
+    # it "will deduct the minimum charge upon touch in" do
+    #   oystercard.top_up(10)
+    #   subject.touch_in
+    #   expect{ subject.touch_out }.to change{ subject.balance }.by(-Oystercard::MINIMUM_CHARGE)
+    # end
 
 
 
