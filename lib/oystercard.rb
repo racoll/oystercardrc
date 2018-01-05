@@ -21,8 +21,9 @@ class Oystercard
   end
 
   def touch_in(station)
-    fail "Insufficient balance to touch in" if balance < MINIMUM_BALANCE
+    fail "Insufficient balance to touch in" if balance < MINIMUM_CHARGE
     @in_journey = true
+    @entry_station = station
   end
 
   def touch_out
