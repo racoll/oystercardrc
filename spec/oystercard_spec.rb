@@ -4,6 +4,7 @@ describe Oystercard do
 
   let(:entry_station) { double :entry_station }
   let(:exit_station) { double :exit_station }
+  let(:journey) { {entry_station: entry_station, exit_station: exit_station} }
 
   subject(:oystercard) { described_class.new }
 
@@ -20,6 +21,10 @@ describe Oystercard do
     oystercard.touch_in(entry_station)
     oystercard.touch_out(exit_station)
     expect(oystercard.exit_station).to eq exit_station
+  end
+
+  it "has an empty list of stations by default" do
+    expect(oystercard.journeys).to be_empty
   end
 
 
